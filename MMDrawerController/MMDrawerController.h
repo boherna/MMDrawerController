@@ -209,32 +209,60 @@ typedef void (^MMDrawerControllerOpenDrawerCompletionBlock)(MMDrawerController *
 @property (nonatomic, assign) BOOL showsShadow;
 
 /**
- The value determining the shadow radius to use if a shadow should be drawn off of `centerViewController` when a drawer is open.
-
- By default, this is set to 10.0
+ The shadow radius of `centerViewController` when a drawer is open.
+ 
+ By default, this is set to 10.0f;
  */
 @property (nonatomic, assign) CGFloat shadowRadius;
 
 /**
- The value determining the shadow opacity to use if a shadow should be drawn off of `centerViewController` when a drawer is open.
-
- By default, this is set to 0.8
+ The shadow opacity of `centerViewController` when a drawer is open.
+ 
+ By default, this is set to 0.8f;
  */
 @property (nonatomic, assign) CGFloat shadowOpacity;
 
 /**
- The flag determining if a custom background view should appear beneath the status bar, forcing the child content to be drawn lower than the status bar. This property is only available for > iOS 7.0 to take into account for the new behavior of the status bar.
+ The shadow offset of `centerViewController` when a drawer is open.
  
- By default, this is set to NO. If running on < iOS 7.0, it will always return NO.
+ By default, this is set to (0, -3);
+ */
+@property (nonatomic, assign) CGSize shadowOffset;
+
+/**
+ The color of the shadow drawn off of 'centerViewController` when a drawer is open.
+ 
+ By default, this is set to the systme default (opaque black).
+ */
+@property (nonatomic, strong) UIColor * shadowColor;
+
+/**
+ The flag determining if a custom background view should appear beneath the status bar, forcing the child content to be drawn lower than the status bar.
+ 
+ By default, this is set to NO.
  */
 @property (nonatomic, assign) BOOL showsStatusBarBackgroundView;
 
 /**
- The color of the status bar background view if `showsStatusBarBackgroundView` is set to YES. This value is ignored in < iOS 7.0.
+ The color of the status bar background view if `showsStatusBarBackgroundView` is set to YES.
  
  By default, this is set `[UIColor blackColor]`.
  */
 @property (nonatomic, strong) UIColor * statusBarViewBackgroundColor;
+
+/**
+ The value determining panning range of centerView's bezel if the user can open drawer with 'MMOpenDrawerGestureModeBezelPanningCenterView' or close drawer with 'MMCloseDrawerGestureModeBezelPanningCenterView' .
+ 
+ By default, this is set 20.0f.
+ */
+@property (nonatomic, assign) CGFloat bezelPanningCenterViewRange;
+
+/**
+ The value determining if the user can open or close drawer with panGesture velocity.
+ 
+ By default, this is set 200.0f.
+ */
+@property (nonatomic, assign) CGFloat panVelocityXAnimationThreshold;
 
 ///---------------------------------------
 /// @name Initializing a `MMDrawerController`
@@ -249,7 +277,7 @@ typedef void (^MMDrawerControllerOpenDrawerCompletionBlock)(MMDrawerController *
  
  @return The newly-initialized drawer container view controller.
  */
--(id)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController rightDrawerViewController:(UIViewController *)rightDrawerViewController;
+-(instancetype)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController rightDrawerViewController:(UIViewController *)rightDrawerViewController;
 
 /**
  Creates and initializes an `MMDrawerController` object with the specified center view controller, left drawer view controller.
@@ -259,7 +287,7 @@ typedef void (^MMDrawerControllerOpenDrawerCompletionBlock)(MMDrawerController *
  
  @return The newly-initialized drawer container view controller.
  */
--(id)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController;
+-(instancetype)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController;
 
 /**
  Creates and initializes an `MMDrawerController` object with the specified center view controller, right drawer view controller.
@@ -269,7 +297,7 @@ typedef void (^MMDrawerControllerOpenDrawerCompletionBlock)(MMDrawerController *
  
  @return The newly-initialized drawer container view controller.
  */
--(id)initWithCenterViewController:(UIViewController *)centerViewController rightDrawerViewController:(UIViewController *)rightDrawerViewController;
+-(instancetype)initWithCenterViewController:(UIViewController *)centerViewController rightDrawerViewController:(UIViewController *)rightDrawerViewController;
 
 ///---------------------------------------
 /// @name Opening and Closing a Drawer
